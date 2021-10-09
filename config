@@ -114,11 +114,11 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
+set $ws1 "1:   Terminal "
+set $ws2 "2:   Code "
+set $ws3 "3:   Chrome"
+set $ws4 "4:   Files "
+set $ws5 "5:   Chat "
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -148,16 +148,16 @@ bindsym $mod+9 exec /home/sg/.config/i3/i3-just-one-display.py $ws9
 bindsym $mod+0 exec /home/sg/.config/i3/i3-just-one-display.py $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload; exec ~/.fehbg
@@ -198,29 +198,38 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        ## status_command i3status
+	font pango:Exp2, FontAwesome5Free, FontAwesome5Brands, SymbolsNerdFont 12
+	status_command i3blocks
 	position top
-	status_command bumblebee-status \
-		-m \
-			nic 			spacer \
-			ping memory battery 	spacer \
-			spotify pasink pasource 	spacer \
-			date time weather \
-		-p \
-			interval=3 \
-			nic.states=^down \
-			ping.address=8.8.8.8 \
-			date.format="%a, %d-%m-%Y" \
-			time.format="%H:%M:%S" \
-			date.left-click="kdialog --calendar 'Calendario'" \
-			weather.showcity="false" \
-		-t solarized-powerline
+	mode dock
+	modifier None
+	
 }
 
-for_window [class="^.*"] border pixel 1
+#bar_bumblebee{
+        ## status_command i3status
+#	position top
+#	status_command bumblebee-status \
+#		-m \
+#			nic 			spacer \
+#			ping memory battery 	spacer \
+#			spotify pasink pasource 	spacer \
+#			date time weather \
+#		-p \
+#			interval=3 \
+#			nic.states=^down \
+#			ping.address=8.8.8.8 \
+#			date.format="%a, %d-%m-%Y" \
+#			time.format="%H:%M:%S" \
+#			date.left-click="kdialog --calendar 'Calendario'" \
+#			weather.showcity="false" \
+#		-t solarized-powerline
+#}
+
+for_window [class="^.*"] border pixel 0
 smart_gaps on
-gaps inner 10
-gaps outer 0
+gaps inner 20
+gaps outer 20
 
 set $bgcommand i3lock -i ~/.wallpers/abstract.png 
 bindsym $mod+Shift+x exec --no-startup-id $bgcommand
@@ -230,11 +239,14 @@ bindsym $mod+Shift+x exec --no-startup-id $bgcommand
 workspace $ws10 output eDP-1
 workspace $ws1 output HDMI-1
 
-exec google-chrome-stable
+exec firefox
 
 bindsym $mod+Shift+y exec /home/sg/.config/i3/autostart.sh 07:00
 
-bindsym --release $mod+m exec import -window root ~/Imagenes/Screenshots/$(date "+%Y-%m-%d_%H:%M:%S").png
-bindsym --release Shift+$mod+m exec import ~/Imagenes/Screenshots/$(date "+%Y-%m-%d_%H:%M:%S").png
+
+
+bindsym --release $mod+z exec import -window root ~/Imagenes/Screenshots/$(date '+%Y-%m-%d_%H:%M:%S').png
+
+bindsym --release $mod+Shift+z exec /home/sg/bin/stc.sh 
 
 

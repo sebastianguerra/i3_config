@@ -242,7 +242,6 @@ bindsym $mod+Shift+x exec --no-startup-id $bgcommand
 workspace $ws10 output eDP-1
 workspace $ws1 output HDMI-1
 
-exec ulauncher
 
 bindsym $mod+Shift+y exec /home/sg/.config/i3/autostart.sh 07:00
 
@@ -254,3 +253,6 @@ bindsym --release $mod+Shift+z exec /home/sg/bin/stc.sh
 
 
 bindsym $mod+p exec (setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap es || setxkbmap us
+
+exec ulauncher
+exec xsetwacom set $(xsetwacom list devices | awk 'FNR==1{print $7}') MapToOutput 1920x1080+1368+0; xsetwacom set "Wacom Intuos S Pen stylus" PressureCurve 0 0 100 100;

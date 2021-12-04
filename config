@@ -34,7 +34,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id ~/.fehbg
 
 # Configuracion de los monitores
-exec xrandr --output HDMI-1 --primary --left-of eDP-1
+exec --no-startup-id ~/.screenlayout/prueba.sh
 
 
 # Use pactl to adjust volume in PulseAudio.
@@ -55,7 +55,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+Shift+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec rofi -modi run -show drun -show-icons
+bindsym $mod+Ctrl+d exec rofi -modi run -show drun -show-icons
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -114,11 +114,11 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:   Terminal "
-set $ws2 "2:   Code "
-set $ws3 "3:   Chrome"
-set $ws4 "4:   Files "
-set $ws5 "5:   Chat "
+set $ws1 "  Terminal "
+set $ws2 " Doom"
+set $ws3 " Firefox"
+set $ws4 "  Files "
+set $ws5 "  Chat "
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -228,8 +228,11 @@ bar {
 
 for_window [class="^.*"] border pixel 0
 smart_gaps on
-gaps inner 20
-gaps outer 20
+gaps inner 3
+gaps outer 5
+#gaps inner 20
+#gaps outer 20
+
 
 set $bgcommand i3lock -i ~/.wallpers/abstract.png 
 bindsym $mod+Shift+x exec --no-startup-id $bgcommand
@@ -239,7 +242,7 @@ bindsym $mod+Shift+x exec --no-startup-id $bgcommand
 workspace $ws10 output eDP-1
 workspace $ws1 output HDMI-1
 
-exec firefox
+exec ulauncher
 
 bindsym $mod+Shift+y exec /home/sg/.config/i3/autostart.sh 07:00
 
@@ -250,3 +253,4 @@ bindsym --release $mod+z exec import -window root ~/Imagenes/Screenshots/$(date 
 bindsym --release $mod+Shift+z exec /home/sg/bin/stc.sh 
 
 
+bindsym $mod+p exec (setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap es || setxkbmap us

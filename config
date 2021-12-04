@@ -34,8 +34,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id ~/.fehbg
 
 # Configuracion de los monitores
-exec --no-startup-id ~/.screenlayout/prueba.sh
-
+exec_always --no-startup-id ~/.screenlayout/prueba.sh
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -114,16 +113,16 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "  Terminal "
-set $ws2 " Doom"
-set $ws3 " Firefox"
-set $ws4 "  Files "
-set $ws5 "  Chat "
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 ""
+set $ws2 ""
+set $ws3 ""
+set $ws4 ""
+set $ws5 ""
+set $ws6 ""
+set $ws7 ""
+set $ws8 ""
+set $ws9 ""
+set $ws10 ""
 
 # switch to workspace
 #bindsym $mod+1 workspace number $ws1
@@ -198,12 +197,13 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	font pango:Exp2, FontAwesome5Free, FontAwesome5Brands, SymbolsNerdFont 12
+	##font pango:Exp2, FontAwesome5Free, FontAwesome5Brands, SymbolsNerdFont 12
+	font pango:Exp2, FontAwesome5Free, FontAwesome5Brands, SymbolsNerdFont 15
 	status_command i3blocks
 	position top
 	mode dock
 	modifier None
-	
+	tray_output HDMI-1
 }
 
 #bar_bumblebee{
@@ -256,3 +256,5 @@ bindsym $mod+p exec (setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap es
 
 exec ulauncher
 exec xsetwacom set $(xsetwacom list devices | awk 'FNR==1{print $7}') MapToOutput 1920x1080+1368+0; xsetwacom set "Wacom Intuos S Pen stylus" PressureCurve 0 0 100 100;
+exec alacritty -e gotop
+exec tilda
